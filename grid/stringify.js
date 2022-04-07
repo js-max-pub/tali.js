@@ -1,14 +1,10 @@
 
 
 import { taliT, taliN } from '../base.js'
-import { Log } from '../../log/mod.js'
-const log = new Log('TALI')
-
 
 
 export function stringify(DD = {}, options) { // {{}} -> tali
 	let aa = dd2aa(DD, options)
-	// console.log('aa', aa)
 	let str = aa2str(aa, options)
 	return str
 }
@@ -16,7 +12,7 @@ export function stringify(DD = {}, options) { // {{}} -> tali
 
 
 export function dd2aa(dd, options = {}) { // {{}} -> [[]]
-	let t0 = Date.now()
+	// let t0 = Date.now()
 	let aa = []
 	let cols = [...new Set(Object.keys(dd).flatMap(row => Object.keys(dd[row])))] // iterate all rows to find all different column-keys
 	if (options.sortCols) cols = cols.sort()
@@ -33,7 +29,7 @@ export function dd2aa(dd, options = {}) { // {{}} -> [[]]
 		aa = aa.sort((a, b) => a[sortCol] > b[sortCol] ? 1 : (a[sortCol] < b[sortCol] ? -1 : 0))
 	}
 	aa.unshift(['', ...cols]) // list of cols is first row
-	log.debug('converted', aa.length, 'lines', t0)
+	// log.debug('converted', aa.length, 'lines', t0)
 	return aa
 }
 
@@ -42,8 +38,9 @@ export function dd2aa(dd, options = {}) { // {{}} -> [[]]
 export function aa2str(aa, options = {}) { // [[]] -> tali
 	// console.log(aa)
 	// log.timer()
-	let t0 = Date.now()
-	if (options.addIndexColumn) addIndexColumn(aa, options.addIndexColumn)
+	aa[0][0] = options.title || ''
+	// let t0 = Date.now()
+	// if (options.addIndexColumn) addIndexColumn(aa, options.addIndexColumn)
 	let string = aa
 		.map(x => x
 			.map(y => y ? y : (options.none || ''))
@@ -53,6 +50,7 @@ export function aa2str(aa, options = {}) { // [[]] -> tali
 			.join('\t')
 		)
 		.join('\n')
-	log.debug('stringified', aa.length, 'lines', t0)
+	if (options.none && string.startsWith(options.none)) string = string.slice(options.none.length)
+	// log.debug('stringified', aa.length, 'lines', t0)
 	return string
 }

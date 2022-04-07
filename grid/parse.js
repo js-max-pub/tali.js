@@ -1,7 +1,5 @@
 
-import { taliT, taliN } from '../base.js'
-import { Log } from '../../log/mod.js'
-const log = new Log('TALI')
+import { taliT, taliN, lines } from '../base.js'
 
 
 export function parse(string = '', options) { // tali -> {{}}
@@ -12,33 +10,31 @@ export function parse(string = '', options) { // tali -> {{}}
 
 
 export function str2aa(string, options = {}) { // tali -> [[]]
-	let t0 = Date.now()
+	// let t0 = Date.now()
 	// let hasSpecialChars = string.includes(taliN) || string.includes(taliT)
-	let aa = string
-		.split('\n')
+	let aa = lines(string)
+		// .split('\n')
 		.filter(x => x.trim())
 		.map(x => x
 			.split('\t')
 			.map(y =>
 				String(y).replaceAll('\t', taliT).replaceAll('\n', taliN).trim()
 			)
-			// .map(y => tt(y, options))
 			.map(y => (y == options.none) ? undefined : y)
-			// .map(y => hasSpecialChars ? toString(y) : y)
 		)
-	log.debug('parsed', string.length, 'characters', t0)
+	// log.debug('parsed', string.length, 'characters', t0)
 	return aa
 }
 
 
 export function aa2dd(aa) { // [[]] -> {{}}
-	let t0 = Date.now()
+	// let t0 = Date.now()
 	let cols = aa[0]
 	let dd = {}
 	for (let row of aa.slice(1)) {
 		dd[row[0]] = Object.fromEntries(row.map((x, i) => [cols[i], x]).slice(1))
 	}
-	log.debug('converted', aa.length, 'lines', t0)
+	// log.debug('converted', aa.length, 'lines', t0)
 	return dd
 }
 

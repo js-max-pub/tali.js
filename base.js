@@ -1,7 +1,13 @@
-// export const taliT = '⇥'
-// export const taliN = '↵'
+export { lines, trim } from '../string/mod.js'
+
+// import { Log } from '../../log/mod.js'
+// export const log = new Log('TALI')
+
+
 export const taliT = '|T|' // 90 degree-rotation makes it look like ⇥ \t   forward till stop
 export const taliN = '|L|' // 90 degree-rotation makes it look like ↵  \r \n  return than down
+// export const taliT = '⇥'
+// export const taliN = '↵'
 
 
 
