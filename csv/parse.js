@@ -1,4 +1,4 @@
-import { lines, trim } from '../base.js'
+import { lines, trim } from '../deps.js'
 
 export function parse(text, delimiter = ';', quotes = '"') {
 	let t0 = Date.now()

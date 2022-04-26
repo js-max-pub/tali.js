@@ -1,6 +1,6 @@
 
-import { taliT, taliN, lines } from '../base.js'
-
+import settings from '../settings.js'
+import { lines } from '../deps.js'
 
 export function parse(string = '', options) { // tali -> {{}}
 	let aa = str2aa(string, options)
@@ -10,17 +10,21 @@ export function parse(string = '', options) { // tali -> {{}}
 
 
 export function str2aa(string, options = {}) { // tali -> [[]]
+	let none = options.none ?? settings.none
+	let remove = [...(options.remove ?? []), ...(settings.remove ?? [])]
+	// console.log("REMOVE",remove)
 	// let t0 = Date.now()
 	// let hasSpecialChars = string.includes(taliN) || string.includes(taliT)
 	let aa = lines(string)
 		// .split('\n')
-		.filter(x => x.trim())
+		.filter(x => x.trim()) // remove empty lines
 		.map(x => x
 			.split('\t')
 			.map(y =>
-				String(y).replaceAll('\t', taliT).replaceAll('\n', taliN).trim()
+				String(y).replaceAll('\t', settings.tab).replaceAll('\r\n', settings.line).replaceAll('\r', settings.line).replaceAll('\n', settings.line).trim()
 			)
-			.map(y => (y == options.none) ? undefined : y)
+			.map(y => (y == none) ? undefined : y)
+			.map(y => remove.includes(y) ? undefined : y)
 		)
 	// log.debug('parsed', string.length, 'characters', t0)
 	return aa

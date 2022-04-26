@@ -1,6 +1,6 @@
 
 
-import { taliT, taliN } from '../base.js'
+import settings from '../settings.js'
 
 
 export function stringify(DD = {}, options) { // {{}} -> tali
@@ -17,7 +17,7 @@ export function dd2aa(dd, options = {}) { // {{}} -> [[]]
 	let cols = [...new Set(Object.keys(dd).flatMap(row => Object.keys(dd[row])))] // iterate all rows to find all different column-keys
 	if (options.sortCols) cols = cols.sort()
 	for (let row in dd) {
-		aa.push([row, ...cols.map(col => dd[row][col] ?? '')])
+		aa.push([row, ...cols.map(col => dd[row][col])])
 	}
 	let sortCol = -1
 	if (options.sortRows) sortCol = 0
@@ -36,16 +36,20 @@ export function dd2aa(dd, options = {}) { // {{}} -> [[]]
 
 
 export function aa2str(aa, options = {}) { // [[]] -> tali
+	let none = options.none || settings.none
+	let remove = [...(options.remove ?? []), ...(settings.remove ?? [])]
 	// console.log(aa)
 	// log.timer()
 	aa[0][0] = options.title || ''
+	// console.log(aa.map(x => x.map(y => y === undefined ? none : y)))
 	// let t0 = Date.now()
 	// if (options.addIndexColumn) addIndexColumn(aa, options.addIndexColumn)
 	let string = aa
 		.map(x => x
-			.map(y => y ? y : (options.none || ''))
+			.map(x => remove?.includes(x) ? undefined : x)
+			.map(y => y === undefined ? none : y)
 			.map(y =>
-				String(y).replaceAll('\t', taliT).replaceAll('\n', taliN).trim()
+				String(y).replaceAll('\t', settings.tab).replaceAll('\n', settings.line).trim()
 			)
 			.join('\t')
 		)
