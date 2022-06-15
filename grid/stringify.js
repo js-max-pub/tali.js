@@ -1,7 +1,7 @@
 
 
 import settings from '../settings.js'
-
+import { flip } from '../lib.js'
 
 export function stringify(DD = {}, options) { // {{}} -> tali
 	let aa = dd2aa(DD, options)
@@ -30,6 +30,7 @@ export function dd2aa(dd, options = {}) { // {{}} -> [[]]
 	}
 	aa.unshift(['', ...cols]) // list of cols is first row
 	// log.debug('converted', aa.length, 'lines', t0)
+	if (options.flip) aa = flip(aa)
 	return aa
 }
 

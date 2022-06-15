@@ -1,6 +1,7 @@
 
 import settings from '../settings.js'
 import { lines } from '../deps.js'
+import { flip } from '../lib.js'
 
 export function parse(string = '', options) { // tali -> {{}}
 	let aa = str2aa(string, options)
@@ -31,8 +32,9 @@ export function str2aa(string, options = {}) { // tali -> [[]]
 }
 
 
-export function aa2dd(aa) { // [[]] -> {{}}
+export function aa2dd(aa, options = {}) { // [[]] -> {{}}
 	// let t0 = Date.now()
+	if (options.flip) aa = flip(aa)
 	let cols = aa[0]
 	let dd = {}
 	for (let row of aa.slice(1)) {

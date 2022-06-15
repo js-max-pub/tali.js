@@ -12,3 +12,14 @@ export function addIndexColumn(aa, pattern) {
 		aa[i].unshift(ids[i])
 	return aa
 }
+
+export function flip(aa) {
+	let out = []
+	for (let i in aa) {
+		for (let j in aa[i]) {
+			out[j] ??= []
+			out[j][i] = aa[i][j]
+		}
+	}
+	return out
+}
