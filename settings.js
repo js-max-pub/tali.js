@@ -1,3 +1,34 @@
+
+export default {
+	table: '\n\n\n',
+	row: '\n',
+	cell: '\t',
+	// list: ':|:',
+	tab: ':T:',
+	line: ':L:',
+	parse: {
+		'': null,
+		'null': null,
+		'undefined': null,
+		'NaN': null,
+		'Invalid Date': null,
+	},
+	stringify: {
+		null: '',
+		undefined: '',
+		NaN: '',
+		'Invalid Date': '',
+	},
+
+
+}
+
+
+
+
+
+
+
 // ::T::  ::L::
 //  |T|    |L|
 //  _T_    _L_
@@ -15,19 +46,20 @@
 // \n \t
 // \T/T\T/
 // <T>   escaping:   <:T:>
-export default {
-	tab: ':T:',  ///   :T:T:T:    -> ⇥T⇥  but difficult to read?!     
-	// tab: '[T]', /// [T]T[T] 
-	// tab: '{T}', /// [T]T[T] 
-	// tab: '<T>', /// [T]T[T]    <T>item two<T>item three<T>
-	// tab: '>T<', /// [T]T[T] 
-	// tab: '\\T/', /// \T/T\T/   \T/item two\T/item three\T/
-	// line: '\\L/', 
-	line: ':L:', // some great text:L:next lien shows this:L:then that    escaping:  :_L_:
-	// array: ':I:',  /// <A>item one<A>item two<A>
-	array: '|',  /// item one|item two|item three|   escaping _|_
+
+// escaping _|_  _ | _
+// list: ':|:',
+///   :T:T:T:    -> ⇥T⇥  but difficult to read?!
+// tab: '[T]', /// [T]T[T]
+// tab: '{T}', /// [T]T[T]
+// tab: '<T>', /// [T]T[T]    <T>item two<T>item three<T>
+// tab: '>T<', /// [T]T[T]
+// tab: '\\T/', /// \T/T\T/   \T/item two\T/item three\T/
+// line: '\\L/',
+// some great text:L:next lien shows this:L:then that    escaping:  :_L_:
+// array: ':I:',  /// <A>item one<A>item two<A>
+// array: '|',  /// item one|item two|item three|   escaping _|_
 
 
-	none: '',
-	remove: [],
-}
+// none: '',
+// remove: ['', 'null', 'undefined', 'NaN'],
