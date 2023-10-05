@@ -20,6 +20,8 @@ if (import.meta.main) { // tests
 	results.file('test1a.tsv').text = TALI.grid.stringify(data)
 	results.file('test1.p1.tsv').text = TALI.grid.stringify(data, { pretty: 1 })
 	results.file('test1.p2.tsv').text = TALI.grid.stringify(data, { pretty: 2 })
+
+	results.file('test1.p2.html').text = TALI.grid.stringify(data, { format: 'html', caption: true })
 	// json.t1.A.a = 5
 	// json = { t1: JSON.parse(Deno.readTextFileSync('test1.json')) }
 	// tali = TALI.grid.stringify(json, { none: '-', pretty: 0 })

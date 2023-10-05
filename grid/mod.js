@@ -10,14 +10,13 @@ const EXT = { tali, csv, html }
 
 export function parse(str, options = {}) {
 	mergeSettingsAndOptions(options)
-	let f = options.source?.toLowerCase() ?? 'tali'
+	let f = options.format?.toLowerCase() ?? 'tali'
 	let aaa = EXT[f].str2aaa(str, options)
 	// let aaa = str2aaa(str, options.source, options)
-	if (options.target?.toLowerCase?.() == 'aaa') return aaa
+	// if (options.target?.toLowerCase?.() == 'aaa') return aaa
 	let ddd = aaa2ddd(aaa, options)
 	return ddd
 }
-
 
 
 export function stringify(ddd, options = {}) {
@@ -25,7 +24,7 @@ export function stringify(ddd, options = {}) {
 	// console.log('ddd',ddd)
 	let aaa = ddd2aaa(ddd, options)
 	// console.log('aaa',aaa)
-	let f = options.source?.toLowerCase() ?? 'tali'
+	let f = options.format?.toLowerCase() ?? 'tali'
 	let str = EXT[f].aaa2str(aaa, options)
 	// let str = aaa2str(aaa, options.target, options)
 	return str

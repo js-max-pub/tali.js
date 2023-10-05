@@ -181,7 +181,7 @@ function ddd2aaa(ddd, options = {}) {
 function dd2aa(dd, options = {}) {
     let aa = [];
     let cols = [
-        ...new Set(Object.keys(dd).flatMap((row)=>Object.keys(dd[row])))
+        ...new Set(Object.values(dd).flatMap((row)=>Object.keys(row)))
     ];
     if (options.sortCols) cols = cols.sort();
     if (Array.isArray(options.sortCols)) cols = options.sortCols;

@@ -35,12 +35,16 @@ export function ddd2aaa(ddd, options = {}) { // {{}} -> [[]]
 	}
 	return aaa
 }
+// function allColumnKeys(dd){
+
+// }
 export function dd2aa(dd, options = {}) { // {{}} -> [[]]
 	// let t0 = Date.now()
 	// console.log(dd, options)
 	let aa = []
 	// let t0 = Date.now()
-	let cols = [...new Set(Object.keys(dd).flatMap(row => Object.keys(dd[row])))] // iterate all rows to find all different column-keys
+	// let cols = [...new Set(Object.keys(dd).flatMap(row => Object.keys(dd[row])))] // iterate all rows to find all different column-keys
+	let cols = [...new Set(Object.values(dd).flatMap(row => Object.keys(row)))] // iterate all rows to find all different column-keys
 	// console.log(Date.now() - t0, 'cols', cols)
 	if (options.sortCols) cols = cols.sort()
 	if (Array.isArray(options.sortCols)) cols = options.sortCols

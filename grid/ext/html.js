@@ -68,3 +68,44 @@ function parseColumn(td, options) {
 	if (!isNaN(intVal)) return intVal
 	return val
 }
+
+
+
+// export function aaa2str(aaa, options = {}) {
+// 	return aaa
+// 		.map(table => table
+// 			.map((row, i) => row
+// 				.map((cell, j) => `<${(i == 0 || j == 0) ? 'th' : 'td'}>${cell}</${(i == 0 || j == 0) ? 'th' : 'td'}>`)
+// 				.join(' ')
+// 			)
+// 			.map(row => `    <tr> ${row} </tr>\n`)
+// 			.join('')
+// 		)
+// 		.map(table => `<table>\n${table}${options.caption ? '<caption>' + table[0][0] + '</caption>' : ''}</table>\n\n\n`)
+// 		.join('')
+// }
+
+export function aaa2str(aaa, options = {}) {
+	let out = ''
+	for (let i in aaa) {
+		let table = aaa[i]
+		out += `<table>\n`
+		for (let j in table) {
+			let row = table[j]
+			out += `    <tr> `
+			for (let k in row) {
+				let cell = row[k]
+				let cellType = (j == 0 || k == 0) ? 'th' : 'td'
+				out += `<${cellType}> `
+				if (!(options.caption && j == 0 && k == 0))
+					out += cell
+				out += ` </${cellType}> `
+			}
+			out += `<tr>\n`
+		}
+		if (options.caption)
+			out += `<caption>${table[0][0]}</caption>`
+		out += `</table>\n\n\n`
+	}
+	return out
+}
