@@ -19,7 +19,7 @@ export function encodeAAA(aaa, options = {}) {
 export function decodeAAA(aaa, options = {}) {
 	// let none = options.none ?? settings.none
 	// let remove = [...(options.remove ?? []), ...(settings.remove ?? [])]
-	console.log(options)
+	// console.log(options)
 	return aaa
 		.map(table => table
 			.map(row => row
